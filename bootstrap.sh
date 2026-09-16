@@ -20,6 +20,10 @@ ln -sf "$DOTFILES_DIR/git/gitignore_global" "$HOME/.gitignore_global"
 
 echo "==> Configuring Git..."
 git config --global core.excludesfile "$HOME/.gitignore_global"
+echo "==> Installing local scripts..."
+mkdir -p "$HOME/.local/bin"
+cp "$DOTFILES_DIR/scripts/init-agent-rules" "$HOME/.local/bin/init-agent-rules"
+chmod +x "$HOME/.local/bin/init-agent-rules"
 
 echo "==> Installing Zsh configuration..."
 if [[ -e "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then

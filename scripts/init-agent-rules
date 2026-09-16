@@ -1,0 +1,21 @@
+#!/bin/zsh
+set -e
+
+PROJECT_DIR="${1:-.}"
+PROJECT_DIR="$(cd "$PROJECT_DIR" && pwd)"
+SOURCE="$HOME/dotfiles/AGENTS.md"
+TARGET="$PROJECT_DIR/AGENTS.md"
+
+if [[ ! -f "$SOURCE" ]]; then
+    echo "Error: $SOURCE not found."
+    exit 1
+fi
+
+if [[ -e "$TARGET" ]]; then
+    echo "AGENTS.md already exists: $TARGET"
+    echo "Refusing to overwrite it."
+    exit 1
+fi
+
+cp "$SOURCE" "$TARGET"
+echo "Created: $TARGET"
