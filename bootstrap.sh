@@ -2,13 +2,20 @@
 
 set -e
 
-if [[ "$(uname -s)" != "Darwin" ]]; then echo "Error: awesome-dev-setup supports macOS only."; exit 1; fi
+DOTFILES_DIR="${0:A:h}"
 
-if ! command -v brew >/dev/null 2>&1; then echo "Error: Homebrew is required. Install it first: https://brew.sh"; exit 1; fi
+if [[ "$(uname -s)" != "Darwin" ]]; then
+    echo "Error: awesome-dev-setup supports macOS only."
+    exit 1
+fi
+
+if ! command -v brew >/dev/null 2>&1; then
+    echo "Error: Homebrew is required."
+    echo "Install it from https://brew.sh"
+    exit 1
+fi
 
 eval "$(brew shellenv)"
-
-DOTFILES_DIR="${0:A:h}"
 
 echo "==> Installing Homebrew packages..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
@@ -16,6 +23,7 @@ brew bundle --file="$DOTFILES_DIR/Brewfile"
 echo "==> Creating config directories..."
 mkdir -p "$HOME/.config/ghostty"
 mkdir -p "$HOME/.config"
+mkdir -p "$HOME/.local/bin"
 
 echo "==> Installing dotfiles..."
 
@@ -26,29 +34,25 @@ ln -sf "$DOTFILES_DIR/git/gitignore_global" "$HOME/.gitignore_global"
 
 echo "==> Configuring Git..."
 git config --global core.excludesfile "$HOME/.gitignore_global"
+
+echo "==> Installing Zsh configuration..."
+if [[ -L "$HOME/.zshrc" && "$(readlink "$HOME/.zshrc")" == "$DOTFILES_DIR/zsh/.zshrc" ]]; then
+    echo "    ~/.zshrc already managed by awesome-dev-setup"
+elif [[ -e "$HOME/.zshrc" ]]; then
+    BACKUP="$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
+    cp "$HOME/.zshrc" "$BACKUP"
+    echo "    Existing ~/.zshrc backed up to $BACKUP"
+    echo "    Existing ~/.zshrc preserved. No replacement performed."
+else
+    ln -s "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
+    echo "    ~/.zshrc linked"
+fi
+
 echo "==> Installing local scripts..."
-mkdir -p "$HOME/.local/bin"
 cp "$DOTFILES_DIR/scripts/init-agent-rules" "$HOME/.local/bin/init-agent-rules"
 chmod +x "$HOME/.local/bin/init-agent-rules"
 
-echo "==> Installing Zsh configuration..."
-if [[ -e "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then
-    cp "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
-fi
-
-if [[ -e "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then
-    cp "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
-fi
-
-if [[ -L "$HOME/.zshrc" && "$(readlink "$HOME/.zshrc")" == "$DOTFILES_DIR/zsh/.zshrc" ]]; then
-    :
-elif [[ ! -e "$HOME/.zshrc" ]]; then
-    ln -s "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
-else
-    echo "==> Existing ~/.zshrc preserved. Source the repository config manually if desired."
-fi
-
 echo "==> Done."
 echo ""
-echo "Machine-specific configuration is intentionally not installed."
-echo "Review ~/.zshrc.local separately."
+echo "Machine-specific configuration belongs in ~/.zshrc.local."
+echo "Use .zshrc.local.example as a starting point."

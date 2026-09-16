@@ -22,7 +22,7 @@ A carefully curated Mac setup for software engineers who want to spend less time
 - tmux
 - Codex + Claude Code
 - mise
-- Docker + Compose
+- Docker Desktop (optional)
 - Kubernetes + Helm
 - GCloud
 - PostgreSQL + Redis
@@ -33,7 +33,7 @@ fzf, ripgrep, fd, bat, eza, zoxide, jq, yq, lazygit
 
 ## Install
 
-Requirements: macOS and Homebrew, with Apple Silicon recommended.
+Requirements: macOS and Homebrew, with Apple Silicon and Intel supported.
 
 ### Clone and bootstrap
 
