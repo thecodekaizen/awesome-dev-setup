@@ -1,12 +1,1 @@
-.zshrc.local
-.DS_Store
-*.log
-.env
-.env.*
-*.pem
-*.key
-*.p12
-*.pfx
-credentials.json
-service-account*.json
-secrets/
+.zshrc.local\n.DS_Store\n*.log\n.env\n.env.*\n*.pem\n*.key\n*.p12\n*.pfx\ncredentials.json\nservice-account*.json\nsecrets/\n\n.zshrc.local\n\n

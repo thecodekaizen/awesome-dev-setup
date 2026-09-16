@@ -1,0 +1,7 @@
+# Machine-specific configuration
+# This file is intentionally not tracked as ~/.zshrc.local.
+
+# Add personal PATH entries, aliases, or environment variables here.
+# Example:
+# export PATH="$HOME/bin:$PATH"
+# alias work="cd ~/your-project"

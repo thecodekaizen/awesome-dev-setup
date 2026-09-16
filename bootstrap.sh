@@ -2,6 +2,12 @@
 
 set -e
 
+if [[ "$(uname -s)" != "Darwin" ]]; then echo "Error: awesome-dev-setup supports macOS only."; exit 1; fi
+
+if ! command -v brew >/dev/null 2>&1; then echo "Error: Homebrew is required. Install it first: https://brew.sh"; exit 1; fi
+
+eval "$(brew shellenv)"
+
 DOTFILES_DIR="${0:A:h}"
 
 echo "==> Installing Homebrew packages..."
@@ -30,8 +36,17 @@ if [[ -e "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then
     cp "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
 fi
 
-rm -f "$HOME/.zshrc"
-ln -s "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
+if [[ -e "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then
+    cp "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
+fi
+
+if [[ -L "$HOME/.zshrc" && "$(readlink "$HOME/.zshrc")" == "$DOTFILES_DIR/zsh/.zshrc" ]]; then
+    :
+elif [[ ! -e "$HOME/.zshrc" ]]; then
+    ln -s "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
+else
+    echo "==> Existing ~/.zshrc preserved. Source the repository config manually if desired."
+fi
 
 echo "==> Done."
 echo ""
