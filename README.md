@@ -55,7 +55,7 @@ Gitleaks scans commits for potential secrets. Machine-specific configuration sta
 
 ## Reproducibility
 
-The configuration lives in version control so the setup can be reproduced on a new Mac.
+The configuration lives in version control so the setup can be reproduced on a new Mac. Machine-specific configuration stays in ~/.zshrc.local and is never committed.
 
 ## Customize
 

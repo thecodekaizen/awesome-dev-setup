@@ -21,12 +21,9 @@ echo "==> Installing Homebrew packages..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 echo "==> Creating config directories..."
-mkdir -p "$HOME/.config/ghostty"
-mkdir -p "$HOME/.config"
-mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/.config/ghostty" "$HOME/.config" "$HOME/.local/bin"
 
 echo "==> Installing dotfiles..."
-
 ln -sf "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 ln -sf "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
 ln -sf "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
@@ -35,24 +32,21 @@ ln -sf "$DOTFILES_DIR/git/gitignore_global" "$HOME/.gitignore_global"
 echo "==> Configuring Git..."
 git config --global core.excludesfile "$HOME/.gitignore_global"
 
+echo "==> Installing local scripts..."
+cp "$DOTFILES_DIR/scripts/init-agent-rules" "$HOME/.local/bin/init-agent-rules"
+chmod +x "$HOME/.local/bin/init-agent-rules"
+
 echo "==> Installing Zsh configuration..."
 if [[ -L "$HOME/.zshrc" && "$(readlink "$HOME/.zshrc")" == "$DOTFILES_DIR/zsh/.zshrc" ]]; then
     echo "    ~/.zshrc already managed by awesome-dev-setup"
 elif [[ -e "$HOME/.zshrc" ]]; then
     BACKUP="$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
     cp "$HOME/.zshrc" "$BACKUP"
-    echo "    Existing ~/.zshrc backed up to $BACKUP"
-    echo "    Existing ~/.zshrc preserved. No replacement performed."
+    echo "    Existing ~/.zshrc preserved. Backup: $BACKUP"
 else
     ln -s "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
-    echo "    ~/.zshrc linked"
 fi
 
-echo "==> Installing local scripts..."
-cp "$DOTFILES_DIR/scripts/init-agent-rules" "$HOME/.local/bin/init-agent-rules"
-chmod +x "$HOME/.local/bin/init-agent-rules"
-
 echo "==> Done."
-echo ""
 echo "Machine-specific configuration belongs in ~/.zshrc.local."
 echo "Use .zshrc.local.example as a starting point."
