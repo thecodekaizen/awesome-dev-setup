@@ -29,7 +29,7 @@ A carefully curated Mac setup for software engineers who want to spend less time
 
  Cli tools
 
-fzf, rirgrep, fd, bat, exa, zoxide, jq, yq, lazygit
+fzf, ripgrep, fd, bat, eza, zoxide, jq, yq, lazygit
 
 ## Install
 
