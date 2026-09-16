@@ -25,7 +25,6 @@ brew "kubernetes-cli"
 # AI / developer applications
 cask "claude-code"
 cask "codex"
-cask "docker"
 cask "font-jetbrains-mono-nerd-font"
 cask "gcloud-cli"
 cask "ghostty"
