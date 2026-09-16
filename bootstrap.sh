@@ -21,6 +21,14 @@ ln -sf "$DOTFILES_DIR/git/gitignore_global" "$HOME/.gitignore_global"
 echo "==> Configuring Git..."
 git config --global core.excludesfile "$HOME/.gitignore_global"
 
+echo "==> Installing Zsh configuration..."
+if [[ -e "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then
+    cp "$HOME/.zshrc" "$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
+fi
+
+rm -f "$HOME/.zshrc"
+ln -s "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
+
 echo "==> Done."
 echo ""
 echo "Machine-specific configuration is intentionally not installed."
