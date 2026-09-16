@@ -36,13 +36,6 @@ alias pip=pip3
 export PATH="$PATH:$HOME/.local/bin"
 
 
-# ─────────────────────────────────────────────
-# Antigravity
-# ─────────────────────────────────────────────
-
-alias ag='open -a "Antigravity"'
-
-
 
 # ─────────────────────────────────────────────
 # binutils
