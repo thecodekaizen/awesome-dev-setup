@@ -2,7 +2,7 @@
 # Homebrew
 # ─────────────────────────────────────────────
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(brew shellenv)"
 
 
 # ─────────────────────────────────────────────
@@ -41,7 +41,7 @@ export PATH="$PATH:$HOME/.local/bin"
 # binutils
 # ─────────────────────────────────────────────
 
-export PATH="/opt/homebrew/opt/binutils/bin:$PATH"
+export PATH="$(brew --prefix binutils)/bin:$PATH"
 
 
 # ─────────────────────────────────────────────

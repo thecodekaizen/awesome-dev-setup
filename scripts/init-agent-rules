@@ -3,11 +3,12 @@ set -e
 
 PROJECT_DIR="${1:-.}"
 PROJECT_DIR="$(cd "$PROJECT_DIR" && pwd)"
-SOURCE="$HOME/dotfiles/AGENTS.md"
+SOURCE="$HOME/.config/awesome-dev-setup/AGENTS.md"
 TARGET="$PROJECT_DIR/AGENTS.md"
 
 if [[ ! -f "$SOURCE" ]]; then
     echo "Error: $SOURCE not found."
+    echo "Run bootstrap.sh first."
     exit 1
 fi
 

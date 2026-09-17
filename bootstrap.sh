@@ -21,7 +21,7 @@ echo "==> Installing Homebrew packages..."
 brew bundle --file="$DOTFILES_DIR/Brewfile"
 
 echo "==> Creating config directories..."
-mkdir -p "$HOME/.config/ghostty" "$HOME/.config" "$HOME/.local/bin"
+mkdir -p "$HOME/.config/ghostty" "$HOME/.config/awesome-dev-setup" "$HOME/.config" "$HOME/.local/bin"
 
 echo "==> Installing dotfiles..."
 ln -sf "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
@@ -31,6 +31,9 @@ ln -sf "$DOTFILES_DIR/git/gitignore_global" "$HOME/.gitignore_global"
 
 echo "==> Configuring Git..."
 git config --global core.excludesfile "$HOME/.gitignore_global"
+
+echo "==> Installing shared AI agent rules..."
+cp "$DOTFILES_DIR/AGENTS.md" "$HOME/.config/awesome-dev-setup/AGENTS.md"
 
 echo "==> Installing local scripts..."
 cp "$DOTFILES_DIR/scripts/init-agent-rules" "$HOME/.local/bin/init-agent-rules"
