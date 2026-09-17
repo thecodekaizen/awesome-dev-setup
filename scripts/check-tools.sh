@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-DOTFILES_DIR="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+DOTFILES_DIR="$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)"
 TOOLS_FILE="$DOTFILES_DIR/tools.yaml"
 
 if [ ! -f "$TOOLS_FILE" ]; then

@@ -1,7 +1,6 @@
 #!/bin/sh
 set -eu
 
-DOTFILES_DIR="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
 
 case "$(uname -s)" in
     Darwin) PLATFORM="macos" ;;

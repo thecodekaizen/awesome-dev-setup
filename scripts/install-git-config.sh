@@ -1,12 +1,13 @@
 #!/bin/sh
 set -eu
 
-DOTFILES_DIR="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+DOTFILES_DIR="$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)"
 CONFIG_DIR="$HOME/.config/awesome-dev-setup"
 GIT_CONFIG="$HOME/.gitconfig"
 SHARED_CONFIG="$DOTFILES_DIR/git/gitconfig"
 INSTALLED_CONFIG="$CONFIG_DIR/gitconfig"
-INCLUDE_PATH="~/.config/awesome-dev-setup/gitconfig"
+# shellcheck disable=SC2088
+INCLUDE_PATH='~/.config/awesome-dev-setup/gitconfig'
 
 if [ ! -f "$SHARED_CONFIG" ]; then
     echo "Error: shared Git config not found."
@@ -24,7 +25,7 @@ fi
 git config --global --unset-all include.path "$SHARED_CONFIG" 2>/dev/null || true
 
 # Add the portable home-relative include.
-if git config --global --get-all include.path 2>/dev/null | grep -Fxq "$INCLUDE_PATH"; then
+if [ -f "$INSTALLED_CONFIG" ] && git config --global --get-all include.path 2>/dev/null | grep -Fxq "$INCLUDE_PATH"; then
     echo "    Shared config already included."
 else
     git config --global --add include.path "$INCLUDE_PATH"
