@@ -1,0 +1,8 @@
+# Project-specific runtime versions can be defined here.
+#
+# Example:
+#
+# [tools]
+# node = "24"
+# python = "3.13"
+# go = "1.27"

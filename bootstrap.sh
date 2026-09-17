@@ -1,55 +1,43 @@
-#!/bin/zsh
+#!/bin/sh
+set -eu
 
-set -e
+DOTFILES_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+OS="$(uname -s)"
+ARCH="$(uname -m)"
 
-DOTFILES_DIR="${0:A:h}"
+echo "========================================"
+echo " awesome-dev-setup"
+echo "========================================"
+echo
+echo "OS:           $OS"
+echo "Architecture: $ARCH"
+echo
 
-if [[ "$(uname -s)" != "Darwin" ]]; then
-    echo "Error: awesome-dev-setup supports macOS only."
-    exit 1
-fi
+case "$OS" in
+    Darwin)
+        echo "Platform: macOS"
+        echo
+        exec "$DOTFILES_DIR/bootstrap/macos.sh"
+        ;;
 
-if ! command -v brew >/dev/null 2>&1; then
-    echo "Error: Homebrew is required."
-    echo "Install it from https://brew.sh"
-    exit 1
-fi
+    Linux)
+        echo "Platform: Linux"
+        echo
+        exec "$DOTFILES_DIR/bootstrap/linux.sh"
+        ;;
 
-eval "$(brew shellenv)"
+    MINGW*|MSYS*|CYGWIN*)
+        echo "Platform: Windows"
+        echo
+        echo "Use PowerShell instead:"
+        echo
+        echo "  powershell -ExecutionPolicy Bypass -File bootstrap/windows.ps1"
+        echo
+        exit 0
+        ;;
 
-echo "==> Installing Homebrew packages..."
-brew bundle --file="$DOTFILES_DIR/Brewfile"
-
-echo "==> Creating config directories..."
-mkdir -p "$HOME/.config/ghostty" "$HOME/.config/awesome-dev-setup" "$HOME/.config" "$HOME/.local/bin"
-
-echo "==> Installing dotfiles..."
-ln -sf "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
-ln -sf "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
-ln -sf "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
-ln -sf "$DOTFILES_DIR/git/gitignore_global" "$HOME/.gitignore_global"
-
-echo "==> Configuring Git..."
-git config --global core.excludesfile "$HOME/.gitignore_global"
-
-echo "==> Installing shared AI agent rules..."
-cp "$DOTFILES_DIR/AGENTS.md" "$HOME/.config/awesome-dev-setup/AGENTS.md"
-
-echo "==> Installing local scripts..."
-cp "$DOTFILES_DIR/scripts/init-agent-rules" "$HOME/.local/bin/init-agent-rules"
-chmod +x "$HOME/.local/bin/init-agent-rules"
-
-echo "==> Installing Zsh configuration..."
-if [[ -L "$HOME/.zshrc" && "$(readlink "$HOME/.zshrc")" == "$DOTFILES_DIR/zsh/.zshrc" ]]; then
-    echo "    ~/.zshrc already managed by awesome-dev-setup"
-elif [[ -e "$HOME/.zshrc" ]]; then
-    BACKUP="$HOME/.zshrc.backup.$(date +%Y%m%d%H%M%S)"
-    cp "$HOME/.zshrc" "$BACKUP"
-    echo "    Existing ~/.zshrc preserved. Backup: $BACKUP"
-else
-    ln -s "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
-fi
-
-echo "==> Done."
-echo "Machine-specific configuration belongs in ~/.zshrc.local."
-echo "Use .zshrc.local.example as a starting point."
+    *)
+        echo "Error: unsupported operating system: $OS"
+        exit 1
+        ;;
+esac

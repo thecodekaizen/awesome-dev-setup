@@ -1,0 +1,126 @@
+version: 1
+
+core:
+  git:
+    macos: git
+    linux: git
+    windows: Git.Git
+
+  gh:
+    macos: gh
+    linux: gh
+    windows: GitHub.cli
+
+  fzf:
+    macos: fzf
+    linux: fzf
+    windows: junegunn.fzf
+
+  ripgrep:
+    macos: ripgrep
+    linux: ripgrep
+    windows: BurntSushi.ripgrep.MSVC
+
+  fd:
+    macos: fd
+    linux: fd-find
+    windows: sharkdp.fd
+
+  bat:
+    macos: bat
+    linux: bat
+    windows: sharkdp.bat
+
+  eza:
+    macos: eza
+    linux: eza
+    windows: eza-community.eza
+
+  zoxide:
+    macos: zoxide
+    linux: zoxide
+    windows: ajeetdsouza.zoxide
+
+  jq:
+    macos: jq
+    linux: jq
+    windows: jqlang.jq
+
+  yq:
+    macos: yq
+    linux: yq
+    windows: MikeFarah.yq
+
+  lazygit:
+    macos: lazygit
+    linux: lazygit
+    windows: JesseDuffield.lazygit
+
+  gitleaks:
+    macos: gitleaks
+    linux: gitleaks
+    windows: gitleaks.gitleaks
+
+development:
+  mise:
+    macos: mise
+    linux: mise
+    windows: jdx.mise
+
+  tmux:
+    macos: tmux
+    linux: tmux
+    windows: null
+
+  starship:
+    macos: starship
+    linux: starship
+    windows: Starship.Starship
+
+  kubectl:
+    macos: kubernetes-cli
+    linux: kubernetes-cli
+    windows: Kubernetes.kubectl
+
+  helm:
+    macos: helm
+    linux: helm
+    windows: Helm.Helm
+
+data:
+  libpq:
+    macos: libpq
+    linux: libpq-dev
+    windows: null
+
+  redis:
+    macos: redis
+    linux: redis
+    windows: null
+
+applications:
+  ghostty:
+    macos: ghostty
+    linux: ghostty
+    windows: null
+
+  zed:
+    macos: zed
+    linux: zed
+    windows: ZedIndustries.Zed
+
+  codex:
+    macos: codex
+    linux: null
+    windows: null
+
+  claude-code:
+    macos: claude-code
+    linux: null
+    windows: null
+
+optional:
+  docker:
+    macos: docker
+    linux: docker
+    windows: Docker.DockerDesktop

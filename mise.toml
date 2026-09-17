@@ -1,0 +1,7 @@
+[tools]
+go = "1.27"
+node = "24"
+python = "3.13"
+java = "temurin-21"
+erlang = "29"
+elixir = "1.20"

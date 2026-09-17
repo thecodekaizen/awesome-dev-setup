@@ -1,0 +1,28 @@
+# awesome-dev-setup
+# Shared Git defaults.
+# Authentication and commit signing remain machine-specific.
+
+[init]
+    defaultBranch = main
+
+[fetch]
+    prune = true
+
+[push]
+    autoSetupRemote = true
+
+[diff]
+    algorithm = histogram
+
+[merge]
+    conflictStyle = zdiff3
+
+[core]
+    pager = less -FRX
+    excludesFile = ~/.gitignore_global
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    lg = log --oneline --graph --decorate
