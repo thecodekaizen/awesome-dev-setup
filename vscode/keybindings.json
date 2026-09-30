@@ -1,0 +1,52 @@
+[
+  // 1. Sidebar & Explorer Toggle (Fast access since Activity Bar is hidden)
+  {
+    "key": "cmd+shift+e",
+    "command": "workbench.view.explorer",
+    "when": "viewContainer.workbench.view.explorer.enabled"
+  },
+  {
+    "key": "cmd+b",
+    "command": "workbench.action.toggleSidebarVisibility"
+  },
+
+  // 2. Editor Splits (tmux-esque logic, without stealing the prefix)
+  {
+    "key": "cmd+\\",
+    "command": "workbench.action.splitEditor" // Horizontal split (like Zed)
+  },
+  {
+    "key": "cmd+shift+\\",
+    "command": "workbench.action.splitEditorDown" // Vertical split
+  },
+
+  // 3. Pane Navigation (vim/tmux style, utilizing Cmd + hjkl)
+  {
+    "key": "cmd+k cmd+h",
+    "command": "workbench.action.navigateLeft"
+  },
+  {
+    "key": "cmd+k cmd+l",
+    "command": "workbench.action.navigateRight"
+  },
+  {
+    "key": "cmd+k cmd+k",
+    "command": "workbench.action.navigateUp"
+  },
+  {
+    "key": "cmd+k cmd+j",
+    "command": "workbench.action.navigateDown"
+  },
+
+  // 4. Integrated Terminal Toggles
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.toggleTerminal"
+  },
+
+  // 5. Cleanly close active item (editor or panel)
+  {
+    "key": "cmd+w",
+    "command": "workbench.action.closeActiveEditor"
+  }
+]
